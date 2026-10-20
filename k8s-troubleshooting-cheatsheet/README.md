@@ -37,3 +37,8 @@ bash deliverables/triage.sh shop ./triage-out
 完整版还包括 OOM、DNS、Service 端点、Ingress、节点 NotReady、PVC、决策图 PNG、其余清单，以及收集项更多的 `triage.sh`。
 
 Full version: GUMROAD_URL
+
+## Delivery time / 交付时间
+
+- Lite (this repo): free, available now. / 精简版（本仓库）：免费，立即可用。
+- Full version: instant download after purchase (GUMROAD_URL). / 完整版：购买后即时下载（GUMROAD_URL）。
