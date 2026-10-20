@@ -1,0 +1,47 @@
+# Lite office edge: Caddy plus Vaultwarden. Nextcloud, Kuma, files, and
+# backup/restore are in the full pack.
+name: ${COMPOSE_PROJECT_NAME:-office}
+
+services:
+  caddy:
+    image: caddy:2.11.7-alpine
+    profiles: ["edge"]
+    restart: unless-stopped
+    environment:
+      ACME_EMAIL: ${ACME_EMAIL}
+      HOST_VAULT: ${HOST_VAULT}
+      TZ: ${TZ}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ${CADDYFILE}:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks: [office]
+
+  vaultwarden:
+    image: vaultwarden/server:1.37.4
+    profiles: ["vaultwarden"]
+    restart: unless-stopped
+    environment:
+      DOMAIN: ${VW_DOMAIN}
+      SIGNUPS_ALLOWED: "false"
+      INVITATIONS_ALLOWED: "true"
+      ADMIN_TOKEN: ${VW_ADMIN_TOKEN}
+      TZ: ${TZ}
+    volumes:
+      - vw_data:/data
+    networks: [office]
+
+networks:
+  office:
+    driver: bridge
+
+volumes:
+  caddy_data:
+    name: ${COMPOSE_PROJECT_NAME:-office}_caddy_data
+  caddy_config:
+    name: ${COMPOSE_PROJECT_NAME:-office}_caddy_config
+  vw_data:
+    name: ${COMPOSE_PROJECT_NAME:-office}_vw_data
