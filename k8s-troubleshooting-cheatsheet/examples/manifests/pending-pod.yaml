@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: shop-api-pending
+  namespace: shop
+  labels:
+    app: shop-api
+spec:
+  containers:
+    - name: api
+      image: registry.example.com/shop/api:1.4.2
+      resources:
+        requests:
+          cpu: "32"
+          memory: 128Gi

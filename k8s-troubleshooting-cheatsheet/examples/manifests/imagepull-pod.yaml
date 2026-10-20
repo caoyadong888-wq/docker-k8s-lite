@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: shop-worker-pull
+  namespace: shop
+  labels:
+    app: shop-worker
+spec:
+  containers:
+    - name: worker
+      image: registry.example.com/shop/missing:9.9.9
+      imagePullPolicy: IfNotPresent
